@@ -25,7 +25,7 @@ class Game():
     def main_loop(self):
              
         while not self.done:
-            self.char.update()
+            self.grid.updateChar()
             self.draw()
            
             self.clock.tick(60)

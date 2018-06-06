@@ -5,6 +5,7 @@ from pygame import Rect
 import numpy as NumPy
 from random import randint
 import os
+import time
 
 
 TILE_W = 61
@@ -60,7 +61,29 @@ class Grid_World():
                     self.tiles[i,j] = TILE_ID_GRASS
         
         self.tiles[self.character.x,self.character.y] = self.character.id
-        print(self.character.y)
+
+    def updateChar(self):
+
+            if self.tiles[self.character.x][self.character.y-1] == TILE_ID_GRASS and self.character.y > -1:
+                 self.character.y -= 1
+                 time.sleep(1)
+                 print("Playing Moving Forward")
+                 print(self.character.y)
+            elif self.tiles[self.character.x-1][self.character.y] == TILE_ID_GRASS and  self.character.x > 0:
+                self.character.x -= 1
+                time.sleep(1)
+                print("Playing Moving LEFT")
+                print(self.character.x)
+            elif self.tiles[self.character.x+1][self.character.y] == TILE_ID_GRASS and  self.character.x < 10:
+                self.character.x += 1
+                time.sleep(1)  
+                print("Playing Moving RIGHT")
+                print(self.character.x)
+            elif self.tiles[self.character.x][self.character.y+1] == TILE_ID_GRASS and  self.character.y < 10:
+                 self.character.y += 1
+                 time.sleep(1)  
+                 print("Playing Moving Down")
+                 print(self.character.y)
             
     def draw(self):
         # loop all tiles, and draw
