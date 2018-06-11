@@ -3,7 +3,7 @@ import pygame
 from pygame.locals import *
 from pygame import Rect
 import numpy as NumPy
-from random import randint
+from random import randint, randrange
 import os
 import time
 
@@ -63,27 +63,36 @@ class Grid_World():
         self.tiles[self.character.x,self.character.y] = self.character.id
 
     def updateChar(self):
-
-            if self.tiles[self.character.x][self.character.y-1] == TILE_ID_GRASS and self.character.y > -1:
+            irand = randrange(0, 10)
+            ## Check Player can move UP without obstacle
+           
+            if self.tiles[self.character.x][self.character.y-1] == TILE_ID_GRASS and self.character.y > -1 and self.character.previousDirection != 'DOWN' and irand in (1,2):
                  self.character.y -= 1
-                 time.sleep(1)
-                 print("Playing Moving Forward")
-                 print(self.character.y)
-            elif self.tiles[self.character.x-1][self.character.y] == TILE_ID_GRASS and  self.character.x > 0:
+                 self.character.previousDirection = 'UP'
+                 time.sleep(0.5)
+                
+               
+            ## Check Player can move LEFT without obstacle
+            elif self.tiles[self.character.x-1][self.character.y] == TILE_ID_GRASS and  self.character.x > 0  and self.character.previousDirection != 'RIGHT' and irand == 3 :
                 self.character.x -= 1
-                time.sleep(1)
-                print("Playing Moving LEFT")
-                print(self.character.x)
-            elif self.tiles[self.character.x+1][self.character.y] == TILE_ID_GRASS and  self.character.x < 10:
+                self.character.previousDirection = 'LEFT' 
+                time.sleep(0.5)
+            
+                
+              
+            ## Check Player can move RIGHT without obtacle
+            elif self.tiles[self.character.x+1][self.character.y] == TILE_ID_GRASS and  self.character.x < 9 and irand == 5 :
                 self.character.x += 1
-                time.sleep(1)  
-                print("Playing Moving RIGHT")
-                print(self.character.x)
-            elif self.tiles[self.character.x][self.character.y+1] == TILE_ID_GRASS and  self.character.y < 10:
+                self.character.previousDirection = 'RIGHT'
+                time.sleep(0.5)  
+                
+               
+            ## Check Player can move DOWN without obstacle
+            elif self.tiles[self.character.x][self.character.y+1] == TILE_ID_GRASS and  self.character.y < 9  and irand == 7:
                  self.character.y += 1
-                 time.sleep(1)  
-                 print("Playing Moving Down")
-                 print(self.character.y)
+                 self.character.previousDirection = 'DOWN'
+                 time.sleep(0.5)  
+               
             
     def draw(self):
         # loop all tiles, and draw

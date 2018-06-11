@@ -5,6 +5,6 @@ class character(object):
         self.x = 0
         self.y = 9
         self.id = 3
-        
+        self.previousDirection = ''
      
 
