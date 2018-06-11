@@ -1,10 +1,9 @@
 import time
 
 class character(object):
-    def __init__(self):
-        self.x = 0
-        self.y = 9
-        self.id = 3
+    def __init__(self,x,y):
+        self.x = x
+        self.y = y
         self.previousDirection = ''
      
 

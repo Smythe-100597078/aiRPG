@@ -16,7 +16,7 @@ TILE_ID_GRASS = 2
 TILE_ID_HERO = 3
 TILE_ID_WALL = 4
 TILE_ID_TREE = 5
-
+TILE_ID_ENEMY = 6
 
 
 class Grid_World():
@@ -24,7 +24,8 @@ class Grid_World():
         self.game = game
         self.screen = game.screen     
         self.load_tileset("tileset.bmp")
-        self.character = game.char
+        self.hero = game.hero
+        self.enemy = game.enemy
         self.clear()
         self.generateGrid()
         
@@ -60,38 +61,47 @@ class Grid_World():
                 if self.tiles[i,j] != TILE_ID_TREE and self.tiles[i,j] != TILE_ID_CORNER and self.tiles[i,j] != TILE_ID_EXIT and self.tiles[i,j] != TILE_ID_WALL:
                     self.tiles[i,j] = TILE_ID_GRASS
         
-        self.tiles[self.character.x,self.character.y] = self.character.id
+        self.tiles[self.hero.x,self.hero.y] = TILE_ID_HERO
+        self.tiles[self.enemy.x,self.enemy.y] = TILE_ID_ENEMY
 
-    def updateChar(self):
+    def updateChar(self,char):
             irand = randrange(0, 10)
+            speed = 0
             ## Check Player can move UP without obstacle
+            if char == self.hero:
+                speed = 0.5
+            elif char == self.enemy:
+                speed = 0.1
            
-            if self.tiles[self.character.x][self.character.y-1] == TILE_ID_GRASS and self.character.y > -1 and self.character.previousDirection != 'DOWN' and irand in (1,2):
-                 self.character.y -= 1
-                 self.character.previousDirection = 'UP'
-                 time.sleep(0.5)
+            if self.tiles[char.x][char.y-1] == TILE_ID_GRASS and char.y > -1 and char.previousDirection != 'DOWN' and irand in (1,2):
+                 char.y -= 1
+                 char.previousDirection = 'UP'
+                 time.sleep(speed)
                 
                
             ## Check Player can move LEFT without obstacle
-            elif self.tiles[self.character.x-1][self.character.y] == TILE_ID_GRASS and  self.character.x > 0  and self.character.previousDirection != 'RIGHT' and irand == 3 :
-                self.character.x -= 1
-                self.character.previousDirection = 'LEFT' 
-                time.sleep(0.5)
+            elif self.tiles[char.x-1][char.y] == TILE_ID_GRASS and  char.x > 0  and char.previousDirection != 'RIGHT' and irand == 3 :
+                char.x -= 1
+                char.previousDirection = 'LEFT' 
+                time.sleep(speed)
             
                 
               
             ## Check Player can move RIGHT without obtacle
-            elif self.tiles[self.character.x+1][self.character.y] == TILE_ID_GRASS and  self.character.x < 9 and irand == 5 :
-                self.character.x += 1
-                self.character.previousDirection = 'RIGHT'
-                time.sleep(0.5)  
+            elif self.tiles[char.x+1][char.y] == TILE_ID_GRASS and  char.x < 9 and irand == 5 :
+                char.x += 1
+                char.previousDirection = 'RIGHT'
+                time.sleep(speed)  
                 
                
             ## Check Player can move DOWN without obstacle
-            elif self.tiles[self.character.x][self.character.y+1] == TILE_ID_GRASS and  self.character.y < 9  and irand == 7:
-                 self.character.y += 1
-                 self.character.previousDirection = 'DOWN'
-                 time.sleep(0.5)  
+            elif self.tiles[char.x][char.y+1] == TILE_ID_GRASS and  char.y < 9  and irand == 7:
+                 char.y += 1
+                 char.previousDirection = 'DOWN'
+                 time.sleep(speed)
+            
+            if self.checkSimpleCollision(self.hero,self.enemy):
+                print("Collision Detected")
                
             
     def draw(self):
@@ -103,4 +113,11 @@ class Grid_World():
                     dest = Rect( x * TILE_W, y * TILE_H, TILE_W, TILE_H )
                     src = Rect( id * TILE_W, 0, TILE_W, TILE_H )
                     self.screen.blit( self.tileset, dest, src )
+
+
+    def checkSimpleCollision(self,hero,enemy):
+        if hero.x == enemy.x and hero.y == enemy.y:
+            return True
+        else:
+            return False
                     
