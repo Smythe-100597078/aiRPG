@@ -176,6 +176,9 @@ class Grid_World():
               time.sleep(0.2)
               self.objectobtained = True
               print(">> A key has been added to the heros inventory!")
+              char.x = 9
+              char.y = 4
+
     
     def charRandomMove(self,char):
         irand = randrange(0, 10)
@@ -186,7 +189,11 @@ class Grid_World():
         elif char == self.enemy and self.enemy.alive:
             speed = 0.1
            
-        if self.tiles[char.x][char.y-1] in (TILE_ID_GRASS,TILE_ID_ENEMY,TILE_ID_HERO) and char.y > -1 and char.previousDirection != 'DOWN' and irand in (1,2):
+        if self.tiles[char.x][char.y-1] in (TILE_ID_GRASS,TILE_ID_ENEMY,TILE_ID_HERO) and char.y > -1 and char.previousDirection != 'DOWN' and irand in (1,2) and char == self.enemy:
+                char.y -= 1
+                char.previousDirection = 'UP'
+                time.sleep(speed)
+        elif self.tiles[char.x][char.y-1] in (TILE_ID_GRASS,TILE_ID_ENEMY,TILE_ID_HERO,TILE_ID_EXIT) and char.y > -1 and char.previousDirection != 'DOWN' and irand in (1,2) and char == self.hero:
                 char.y -= 1
                 char.previousDirection = 'UP'
                 time.sleep(speed)
@@ -220,5 +227,7 @@ class Grid_World():
             self.game.done = True
             print(">> The player has survived the treacherous map!")
             print(">> Game over for now!")
+        
+        
 
 
