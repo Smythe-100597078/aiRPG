@@ -134,15 +134,12 @@ class Grid_World():
         for i in range(len(self.path)):
           if path[i] == "A":
               char.x += 1
-              time.sleep(0.2)
-                
+              time.sleep(0.2)  
           elif path[i] == "B":
-              char.x += 1
-             
+              char.x += 1  
               time.sleep(0.2)
           elif path[i] == "C":
-              char.x += 1
-              
+              char.x += 1 
               time.sleep(0.2)
           elif path[i] == "D":
               char.x += 1
@@ -207,7 +204,8 @@ class Grid_World():
         elif self.tiles[char.x+1][char.y] in (TILE_ID_GRASS,TILE_ID_ENEMY,TILE_ID_HERO) and  char.x < 9 and irand == 5 :
             char.x += 1
             char.previousDirection = 'RIGHT'
-            time.sleep(speed)  
+            time.sleep(speed)
+          
                 
                
         ## Check Player can move DOWN without obstacle
