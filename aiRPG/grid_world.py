@@ -218,7 +218,7 @@ class Grid_World():
         
         if self.tiles[self.hero.x][self.hero.y] == TILE_ID_EXIT and self.objectobtained:
             self.game.done = True
-            print(">> The player has survived the trechourous map!")
+            print(">> The player has survived the treacherous map!")
             print(">> Game over for now!")
 
 
