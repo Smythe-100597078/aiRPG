@@ -1,9 +1,4 @@
-'''Simple data loader module.
 
-Loads data files from the "data" directory shipped with a game.
-
-Enhancing this to handle caching etc. is left as an exercise for the reader.
-'''
 
 import os
 from os.path import join as join_path

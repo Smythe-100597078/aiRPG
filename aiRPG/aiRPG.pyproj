@@ -28,11 +28,17 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="data.py" />
+    <Compile Include="goapInteraction.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="main.py" />
     <Compile Include="game_loop.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="grid_world.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="searches.py">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
