@@ -27,7 +27,6 @@
     <Compile Include="character.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="data.py" />
     <Compile Include="goapInteraction.py">
       <SubType>Code</SubType>
     </Compile>

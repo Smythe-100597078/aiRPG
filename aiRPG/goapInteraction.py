@@ -74,7 +74,7 @@ class goapInteraction():
     def run_game(self):
         HR = '-'*50
     
-        print(">> The Hero and a Foe has entered a battle!")
+        print(">> The Hero and a Foe have entered a battle!")
         print(HR)
         running = True
         while running:
